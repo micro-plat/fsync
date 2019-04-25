@@ -12,3 +12,4 @@
 4. 对频繁下载的文件进行缓存，降低文件下载时间
 
 
+![同步服务](https://github.com/micro-plat/fsync/blob/master/fsync.png)
