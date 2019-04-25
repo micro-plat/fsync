@@ -1,7 +1,7 @@
 ### fsync 文件服务
 #### client端
 1. 提供http,rpc文件上传服务
-2. 定时将文件同步到`server`端服务
+2. 定时将文件同步到`server`端
 3. 支持同步到多个`server`端
 
 
