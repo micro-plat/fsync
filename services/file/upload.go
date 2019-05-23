@@ -51,9 +51,13 @@ func (u *UploadHandler) Handle(ctx *context.Context) (r interface{}) {
 
 	name := fmt.Sprintf("%s%s", utility.GetGUID(), filepath.Ext(fileName))
 	path := filepath.Join(u.root, name)
-	urlPath := fmt.Sprintf("%s/%s", strings.Trim(u.url, "/"), name)
+	fullURL := fmt.Sprintf("%s/%s", strings.Trim(u.url, "/"), name)
 
 	ctx.Log.Info("3. 构建文件名")
+	err = os.MkdirAll(filepath.Dir(path), os.ModePerm)
+	if err != nil {
+		return fmt.Errorf("创建本地目录失败:%v", err)
+	}
 	nf, err := os.Create(path)
 	if err != nil {
 		return fmt.Errorf("创建文件失败:%s(err:%v)", path, err)
@@ -68,6 +72,6 @@ func (u *UploadHandler) Handle(ctx *context.Context) (r interface{}) {
 
 	ctx.Log.Info("5. 返回结果")
 	return map[string]string{
-		"url": urlPath,
+		"url": fullURL,
 	}
 }
